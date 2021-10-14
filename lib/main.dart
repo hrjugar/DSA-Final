@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        fontFamily: 'Comfortaa',
         primarySwatch: Colors.blue,
       ),
       home: LoginScreen(),
