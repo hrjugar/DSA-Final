@@ -1,7 +1,11 @@
+import 'package:dsa_final/screens/customer_main_screen.dart';
+import 'package:dsa_final/screens/restaurant_main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     return LoginScreenState();
@@ -10,6 +14,8 @@ class LoginScreen extends StatefulWidget {
 
 class LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
+  final mainScreens = [CustomerMainScreen(), RestaurantMainScreen()];
+  int toggleSwitchIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +51,7 @@ class LoginScreenState extends State<LoginScreen> {
               ),
               SizedBox(height: 10),
               ToggleSwitch(
+                initialLabelIndex: toggleSwitchIndex,
                 minWidth: 125,
                 minHeight: 35,
                 fontSize: 12,
@@ -57,6 +64,7 @@ class LoginScreenState extends State<LoginScreen> {
                 inactiveBgColor: Colors.orange.withOpacity(0.75),
                 inactiveFgColor: Colors.black.withOpacity(0.5),
                 onToggle: (index) {
+                  setState(() => toggleSwitchIndex = index);
                   // TODO: Backend Work
                 },
               ),
@@ -103,7 +111,13 @@ class LoginScreenState extends State<LoginScreen> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    // TODO: Backend Work
+                    // TODO: Backend Work, login validation
+                    Navigator.push(
+                      context, 
+                      MaterialPageRoute(
+                        builder: (context) => mainScreens[toggleSwitchIndex]
+                      )
+                    );
                   }, 
                   child: Text("login",
                     style: TextStyle(
