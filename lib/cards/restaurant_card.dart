@@ -46,11 +46,16 @@ class _RestaurantCardState extends State<RestaurantCard> {
             ),
             LayoutId(
               id: _RestaurantCardSlot.name,
-               child: Text(widget.name,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold
-                )
+               child: SizedBox(
+                 width: MediaQuery.of(context).size.width * 0.75,
+                 child: Text(widget.name,
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis
+                 ),
                )
             ),
             LayoutId(
