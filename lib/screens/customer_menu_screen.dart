@@ -43,7 +43,10 @@ class CustomerMenuScreen extends StatelessWidget {
             delegate: SliverChildBuilderDelegate(
               (context, index) {
                 return Padding(
-                  padding: const EdgeInsets.all(18),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 18, 
+                    vertical: 9
+                  ),
                   child: Card(
                     color: Colors.grey[100],
                     shape: RoundedRectangleBorder(
@@ -86,35 +89,59 @@ class CustomerMenuScreen extends StatelessWidget {
                                       fontWeight: FontWeight.w500
                                     )
                                   ),
-                                  SizedBox(height: 10),
-                                  SizedBox(
-                                    width: double.infinity,
-                                    height: 30,
-                                    child: ElevatedButton(
-                                      child: Icon(Icons.add),
-                                      onPressed: () {
+                                  SizedBox(height: 15),
+                                  Row(
+                                    children: [
+                                      SizedBox(
+                                        height: 30,
+                                        child: ElevatedButton(
+                                          onPressed: () {
 
-                                      }, 
-                                      style: ButtonStyle(
-                                        elevation: 
-                                          MaterialStateProperty.all(0),
-                                        backgroundColor: 
-                                          MaterialStateProperty.all(
-                                            Colors.deepOrange
-                                        ),
-                                        foregroundColor: 
-                                          MaterialStateProperty.all(
-                                            Colors.white
-                                        ),
-                                        shape: 
-                                          MaterialStateProperty.all(
-                                            RoundedRectangleBorder(
-                                              borderRadius: 
-                                                BorderRadius.circular(15)
+                                          },
+                                          child: Icon(Icons.remove, 
+                                            color: Colors.white,
+                                            size: 20,
+                                          ),
+                                          style: ButtonStyle(
+                                            backgroundColor: 
+                                              MaterialStateProperty.all(
+                                                Colors.deepOrange
+                                            ),
+                                            shape: MaterialStateProperty.all(
+                                              CircleBorder()
                                             )
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(width: 10),
+                                      Text("0", 
+                                        style: TextStyle(
+                                          fontSize: 20
                                         )
                                       ),
-                                    ),
+                                      SizedBox(width: 10),
+                                      SizedBox(
+                                        height: 30,
+                                        child: ElevatedButton(
+                                          onPressed: () {
+
+                                          },
+                                          child: Icon(Icons.add, 
+                                            color: Colors.white,
+                                            size: 20,
+                                          ),
+                                          style: ButtonStyle(
+                                            backgroundColor: 
+                                              MaterialStateProperty.all(
+                                                Colors.deepOrange
+                                            ),
+                                            shape: MaterialStateProperty.all(
+                                              CircleBorder()
+                                            )
+                                          ),
+                                        ),
+                                      )
+                                    ],
                                   )
                                 ],
                               ),
