@@ -7,18 +7,19 @@ class Restaurant {
   String address;
 
   Restaurant({
-    required this.background,
-    required this.logo,
-    required this.name,
+    required String backgroundPath, 
+    required String logoPath, 
+    required this.name, 
     required this.address
-  });
+  }) : background = Image.asset(backgroundPath),
+        logo = Image.asset(logoPath);
 }
 
 List<Restaurant> restaurants = restaurantsData
   .map(
     (item) => Restaurant(
-      background: item["background"] as Image,
-      logo: item["logo"] as Image, 
+      backgroundPath: item["background"] as String,
+      logoPath: item["logo"] as String, 
       name: item["name"] as String, 
       address: item["address"] as String
     )
@@ -26,8 +27,8 @@ List<Restaurant> restaurants = restaurantsData
 
 var restaurantsData = [
   {
-    "background": Image.asset("assets/images/restaurant_logo_placeholder.png"),
-    "logo": Image.asset("assets/images/restaurant_logo_placeholder.png"),
+    "background": "assets/images/restaurant_placeholder.jpg",
+    "logo": "assets/images/restaurant_logo_placeholder.png",
     "name": "Restaurant X",
     "address": "Lanang, Davao City, Philippines"
   }

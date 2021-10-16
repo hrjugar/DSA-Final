@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:dsa_final/database/restaurant.dart';
 
 class RestaurantCard extends StatefulWidget {
-  final Image logo;
-  final Image background;
-  final String name;
-  final String address;
+  final Restaurant restaurant;
   
   const RestaurantCard({Key? key, 
-    required this.logo, 
-    required this.background, 
-    required this.name, 
-    required this.address
+    required this.restaurant
   }) : super(key: key);
 
   @override
@@ -34,21 +29,28 @@ class _RestaurantCardState extends State<RestaurantCard> {
               id: _RestaurantCardSlot.background, 
               child: ClipRRect(
                 borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
-                child: widget.background
+                child: widget.restaurant.background
               )
             ),
             LayoutId(
               id: _RestaurantCardSlot.logo, 
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: widget.logo
+                child: SizedBox(
+                  width: 50,
+                  height: 50,
+                  child: FittedBox(
+                    fit: BoxFit.fill,
+                    child: widget.restaurant.logo
+                  )
+                )
               )
             ),
             LayoutId(
               id: _RestaurantCardSlot.name,
                child: SizedBox(
                  width: MediaQuery.of(context).size.width * 0.75,
-                 child: Text(widget.name,
+                 child: Text(widget.restaurant.name,
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold
@@ -62,7 +64,7 @@ class _RestaurantCardState extends State<RestaurantCard> {
               id: _RestaurantCardSlot.address, 
               child: SizedBox(
                 width: MediaQuery.of(context).size.width * 0.75,
-                child: Text(widget.address,
+                child: Text(widget.restaurant.address,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),

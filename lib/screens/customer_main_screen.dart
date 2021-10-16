@@ -1,4 +1,5 @@
 import 'package:dsa_final/cards/restaurant_card.dart';
+import 'package:dsa_final/database/restaurant.dart';
 import 'package:dsa_final/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -35,23 +36,12 @@ class CustomerMainScreen extends StatelessWidget {
         child: Flexible(
           fit: FlexFit.loose,
           child: ListView.separated(
-            itemCount: 10, // TODO: Backend Work
+            itemCount: restaurants.length, // TODO: Backend Work
             scrollDirection: Axis.vertical,
             separatorBuilder: (context, index) => SizedBox(height: 20),
-            itemBuilder: (context, index) {
-              // TODO: Backend Work
-              return RestaurantCard(
-                logo: Image.asset(
-                  "assets/images/restaurant_logo_placeholder.png",
-                  width: 50
-                ),
-                background: Image.asset(
-                  "assets/images/restaurant_placeholder.jpg"
-                ),
-                name: "Restaurant Name",
-                address: "Address"
-              );
-            }
+            itemBuilder: (context, index) => RestaurantCard(
+              restaurant: restaurants[index]
+            )
           ),
         )
       ),
