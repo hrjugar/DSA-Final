@@ -27,10 +27,104 @@ class CustomerMenuScreen extends StatelessWidget {
               height: MediaQuery.of(context).size.height / 3
             )
           ),
+          SliverToBoxAdapter(
+            child: Align(
+              alignment: Alignment.topCenter,
+              child: Text("menu",
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.deepOrange
+                ),
+              ),
+            ),
+          ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (context, index) {
-                return ListTile(title: Text("Item $index"));
+                return Padding(
+                  padding: const EdgeInsets.all(18),
+                  child: Card(
+                    color: Colors.grey[100],
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30)
+                    ),
+                    child: Container(
+                      width: double.infinity,
+                      height: 125,
+                      child: Padding(
+                        padding: const EdgeInsets.all(18),
+                        child: Row(
+                          children: [
+                            Container(
+                              constraints: BoxConstraints(
+                                maxWidth: 125,
+                                maxHeight: 100
+                              ),
+                              child: Image.asset(
+                                "assets/images/menu_item_placeholder.png"
+                              ),
+                            ),
+                            SizedBox(width: 20),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.45,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Item $index",
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text("₱1000.00", 
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500
+                                    )
+                                  ),
+                                  SizedBox(height: 10),
+                                  SizedBox(
+                                    width: double.infinity,
+                                    height: 30,
+                                    child: ElevatedButton(
+                                      child: Icon(Icons.add),
+                                      onPressed: () {
+
+                                      }, 
+                                      style: ButtonStyle(
+                                        elevation: 
+                                          MaterialStateProperty.all(0),
+                                        backgroundColor: 
+                                          MaterialStateProperty.all(
+                                            Colors.deepOrange
+                                        ),
+                                        foregroundColor: 
+                                          MaterialStateProperty.all(
+                                            Colors.white
+                                        ),
+                                        shape: 
+                                          MaterialStateProperty.all(
+                                            RoundedRectangleBorder(
+                                              borderRadius: 
+                                                BorderRadius.circular(15)
+                                            )
+                                        )
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                );
               }
             )
           )
@@ -48,7 +142,6 @@ class _RestaurantHeaderDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
-    print("Current shrink offset is $shrinkOffset");
     return CustomMultiChildLayout(
       delegate: _RestaurantHeaderLayoutDelegate(),
       children: [
