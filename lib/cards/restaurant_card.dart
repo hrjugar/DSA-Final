@@ -52,19 +52,19 @@ class _RestaurantCardState extends State<RestaurantCard> {
               ),
               LayoutId(
                 id: _RestaurantCardSlot.logo, 
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: SizedBox(
-                    width: 50,
-                    height: 50,
-                    child: FittedBox(
-                      fit: BoxFit.fill,
-                      child: Hero(
-                        tag: "logo" + widget.index.toString(), 
+                child: Hero(
+                  tag: "logo" + widget.index.toString(),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: FittedBox(
+                        fit: BoxFit.fill,
                         child: widget.restaurant.logo
                       )
                     )
-                  )
+                  ),
                 )
               ),
               LayoutId(

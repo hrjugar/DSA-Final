@@ -32,15 +32,15 @@ class CustomerMenuScreen extends StatelessWidget {
                 ),
                 LayoutId(
                   id: _RestaurantHeaderSlot.logo,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: SizedBox(
-                      width: 100,
-                      child: FittedBox(
-                        fit: BoxFit.fill,
-                        child: Hero(
-                          tag: "logo" + index.toString(), 
-                          child: restaurant.logo
+                  child: Hero(
+                    tag: "logo" + index.toString(),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: SizedBox(
+                        width: 100,
+                        child: FittedBox(
+                          fit: BoxFit.fill,
+                          child: restaurant.logo,
                         ),
                       ),
                     ),
@@ -80,7 +80,7 @@ class CustomerMenuScreen extends StatelessWidget {
                 )
               ),
             ),
-          ),
+          )
         ],
       ),
     );
