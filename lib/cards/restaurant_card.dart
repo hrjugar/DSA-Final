@@ -4,9 +4,11 @@ import 'package:dsa_final/database/restaurant.dart';
 
 class RestaurantCard extends StatefulWidget {
   final Restaurant restaurant;
+  final int index;
   
   const RestaurantCard({Key? key, 
-    required this.restaurant
+    required this.restaurant,
+    required this.index
   }) : super(key: key);
 
   @override
@@ -25,7 +27,8 @@ class _RestaurantCardState extends State<RestaurantCard> {
             context, 
             MaterialPageRoute(
               builder: (context) => CustomerMenuScreen(
-                restaurant: widget.restaurant
+                restaurant: widget.restaurant,
+                index: widget.index
               )
             )
           );
@@ -42,7 +45,7 @@ class _RestaurantCardState extends State<RestaurantCard> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
                   child: Hero(
-                    tag: "background",
+                    tag: "background" + widget.index.toString(),
                     child: widget.restaurant.background
                   )
                 )
@@ -57,7 +60,7 @@ class _RestaurantCardState extends State<RestaurantCard> {
                     child: FittedBox(
                       fit: BoxFit.fill,
                       child: Hero(
-                        tag: "logo", 
+                        tag: "logo" + widget.index.toString(), 
                         child: widget.restaurant.logo
                       )
                     )
@@ -69,7 +72,7 @@ class _RestaurantCardState extends State<RestaurantCard> {
                  child: SizedBox(
                    width: MediaQuery.of(context).size.width * 0.75,
                    child: Hero(
-                     tag: "name",
+                     tag: "name" + widget.index.toString(),
                      child: Material(
                        child: Text(widget.restaurant.name,
                         style: TextStyle(
@@ -88,7 +91,7 @@ class _RestaurantCardState extends State<RestaurantCard> {
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width * 0.75,
                   child: Hero(
-                    tag: "address",
+                    tag: "address" + widget.index.toString(),
                     child: Material(
                       child: Text(widget.restaurant.address,
                         maxLines: 2,

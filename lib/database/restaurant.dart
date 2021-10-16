@@ -31,6 +31,18 @@ var restaurantsData = [
     "logo": "assets/images/restaurant_logo_placeholder.png",
     "name": "Restaurant X",
     "address": "Lanang, Davao City, Philippines"
+  },
+  {
+    "background": "assets/images/restaurant_placeholder.jpg",
+    "logo": "assets/images/restaurant_logo_placeholder.png",
+    "name": "Restaurant X",
+    "address": "Lanang, Davao City, Philippines"
+  },
+  {
+    "background": "assets/images/restaurant_placeholder.jpg",
+    "logo": "assets/images/restaurant_logo_placeholder.png",
+    "name": "Restaurant X",
+    "address": "Lanang, Davao City, Philippines"
   }
 ];
 

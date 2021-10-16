@@ -3,27 +3,30 @@ import 'package:dsa_final/database/restaurant.dart';
 
 class CustomerMenuScreen extends StatelessWidget {
   final Restaurant restaurant;
+  final int index;
 
   const CustomerMenuScreen({
     Key? key, 
-    required this.restaurant
+    required this.restaurant,
+    required this.index
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
             width: double.infinity,
-            height: 275,
+            height: MediaQuery.of(context).size.height / 2.5,
             child: CustomMultiChildLayout(
               delegate: _RestaurantHeaderLayoutDelegate(),
               children: [
                 LayoutId(
                   id: _RestaurantHeaderSlot.background,
                   child: Hero(
-                    tag: "background", 
+                    tag: "background" + index.toString(), 
                     child: restaurant.background
                   ),
                 ),
@@ -36,7 +39,7 @@ class CustomerMenuScreen extends StatelessWidget {
                       child: FittedBox(
                         fit: BoxFit.fill,
                         child: Hero(
-                          tag: "logo", 
+                          tag: "logo" + index.toString(), 
                           child: restaurant.logo
                         ),
                       ),
@@ -50,7 +53,7 @@ class CustomerMenuScreen extends StatelessWidget {
                     child: Center(
                       heightFactor: 1,
                       child: Hero(
-                        tag: "name",
+                        tag: "name" + index.toString(),
                         child: Material(
                           child: Text(restaurant.name,
                             style: TextStyle(
@@ -70,7 +73,7 @@ class CustomerMenuScreen extends StatelessWidget {
                     child: Center(
                       heightFactor: 1,
                       child: Hero(
-                        tag: "address", 
+                        tag: "address" + index.toString(), 
                         child: Material(
                           child: Text(restaurant.address
                           ),
@@ -81,7 +84,7 @@ class CustomerMenuScreen extends StatelessWidget {
                 )
               ],
             ),
-          ),
+          )
         ],
       ),
     );

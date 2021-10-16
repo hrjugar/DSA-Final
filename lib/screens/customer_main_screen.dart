@@ -30,7 +30,6 @@ class CustomerMainScreen extends StatelessWidget {
       ),
       body: Container(
         width: double.infinity,
-        height: double.infinity,
         padding: const EdgeInsets.all(18),
         decoration: BoxDecoration(color: Colors.white),
         child: Flexible(
@@ -40,7 +39,8 @@ class CustomerMainScreen extends StatelessWidget {
             scrollDirection: Axis.vertical,
             separatorBuilder: (context, index) => SizedBox(height: 20),
             itemBuilder: (context, index) => RestaurantCard(
-              restaurant: restaurants[index]
+              restaurant: restaurants[index],
+              index: index
             )
           ),
         )
