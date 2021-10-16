@@ -19,7 +19,7 @@ class CustomerMenuScreen extends StatelessWidget {
         children: [
           SizedBox(
             width: double.infinity,
-            height: MediaQuery.of(context).size.height / 2.5,
+            height: 1080 / (1920 / MediaQuery.of(context).size.width) + 50,
             child: CustomMultiChildLayout(
               delegate: _RestaurantHeaderLayoutDelegate(),
               children: [
@@ -45,46 +45,42 @@ class CustomerMenuScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                ),
-                LayoutId(
-                  id: _RestaurantHeaderSlot.name,
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: Center(
-                      heightFactor: 1,
-                      child: Hero(
-                        tag: "name" + index.toString(),
-                        child: Material(
-                          child: Text(restaurant.name,
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold
-                            ),
-                          )
-                        )
-                      ),
-                    ),
-                  )
-                ),
-                LayoutId(
-                  id: _RestaurantHeaderSlot.address, 
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.75,
-                    child: Center(
-                      heightFactor: 1,
-                      child: Hero(
-                        tag: "address" + index.toString(), 
-                        child: Material(
-                          child: Text(restaurant.address
-                          ),
-                        )
-                      ),
-                    ),
-                  )
                 )
               ],
             ),
-          )
+          ),
+          SizedBox(height: 15),
+          Center(
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width * 0.75,
+              child: Hero(
+                tag: "name" + index.toString(),
+                child: Material(
+                  child: Text(restaurant.name,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold
+                    ),
+                  )
+                )
+              ),
+            ),
+          ),
+          SizedBox(height: 10),
+          Center(
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width * 0.75,
+              child: Hero(
+                tag: "address" + index.toString(), 
+                child: Material(
+                  child: Text(restaurant.address,
+                    textAlign: TextAlign.center
+                  ),
+                )
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -121,38 +117,6 @@ class _RestaurantHeaderLayoutDelegate extends MultiChildLayoutDelegate {
       );
 
       currentHeight += logoSize.height / 2;
-    }
-
-    if (hasChild(_RestaurantHeaderSlot.name)) {
-      final nameSize = layoutChild(
-        _RestaurantHeaderSlot.name,
-        BoxConstraints.loose(size)
-      );
-
-      positionChild(
-        _RestaurantHeaderSlot.name, 
-        Offset(
-          backgroundSize.width / 2 - nameSize.width / 2,
-          currentHeight + 10
-        )
-      );
-
-      currentHeight += nameSize.height + 10;
-    }
-
-    if (hasChild(_RestaurantHeaderSlot.address)) {
-      final addressSize = layoutChild(
-        _RestaurantHeaderSlot.address,
-        BoxConstraints.loose(size)
-      );
-
-      positionChild(
-        _RestaurantHeaderSlot.address, 
-        Offset(
-          backgroundSize.width / 2 - addressSize.width / 2, 
-          currentHeight + 5
-        )
-      );
     }
   }
 
