@@ -343,7 +343,10 @@ class _CustomerMenuScreenState extends State<CustomerMenuScreen> {
                                    });
 
                                   widget.restaurant.orders.add(
-                                    Order(items: items)
+                                    Order(
+                                      items: items, 
+                                      customer: widget.customer
+                                    )
                                   );
 
                                   Navigator.push(
