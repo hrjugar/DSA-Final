@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:dsa_final/database/restaurant.dart';
 import 'dart:math';
 
-class CustomerMenuScreen extends StatelessWidget {
+class CustomerMenuScreen extends StatefulWidget {
   final Restaurant restaurant;
   final int restaurantIndex;
 
@@ -14,14 +14,33 @@ class CustomerMenuScreen extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<CustomerMenuScreen> createState() => _CustomerMenuScreenState();
+}
+
+class _CustomerMenuScreenState extends State<CustomerMenuScreen> {
+  late List<ValueNotifier<int>> _counters;
+  final ValueNotifier<double> _foodPrice = ValueNotifier(0);
+
+  @override
+  void initState() {
+    _counters = List.generate(
+      widget.restaurant.menu.length, 
+      (index) => ValueNotifier<int>(0)
+    );
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    List<Food> menu = widget.restaurant.menu;
+
     return Scaffold(
       body: CustomScrollView(
         slivers: [
           SliverPersistentHeader(
             pinned: true,
             floating: true,
-            delegate: _RestaurantHeaderDelegate(restaurant, restaurantIndex)
+            delegate: _RestaurantHeaderDelegate(widget.restaurant, widget.restaurantIndex)
           ),
           SliverToBoxAdapter(
             child: SizedBox(
@@ -53,7 +72,7 @@ class CustomerMenuScreen extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30)
                     ),
-                    child: Container(
+                    child: SizedBox(
                       width: double.infinity,
                       height: 125,
                       child: Padding(
@@ -65,7 +84,7 @@ class CustomerMenuScreen extends StatelessWidget {
                                 maxWidth: 125,
                                 maxHeight: 100
                               ),
-                              child: restaurant.menu[index].image,
+                              child: menu[index].image,
                             ),
                             SizedBox(width: 20),
                             SizedBox(
@@ -73,7 +92,7 @@ class CustomerMenuScreen extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(restaurant.menu[index].name,
+                                  Text(menu[index].name,
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
@@ -82,7 +101,7 @@ class CustomerMenuScreen extends StatelessWidget {
                                     ),
                                   ),
                                   SizedBox(height: 5),
-                                  Text("₱" + restaurant.menu[index].price
+                                  Text("₱" + menu[index].price
                                     .toStringAsFixed(2), 
                                     style: TextStyle(
                                       fontSize: 14,
@@ -96,7 +115,15 @@ class CustomerMenuScreen extends StatelessWidget {
                                         height: 30,
                                         child: ElevatedButton(
                                           onPressed: () {
+                                            _counters[index].value = max(
+                                              0, 
+                                              _counters[index].value - 1
+                                            );
 
+                                            _foodPrice.value = max(
+                                              0,
+                                              _foodPrice.value - menu[index].price
+                                            );
                                           },
                                           child: Icon(Icons.remove, 
                                             color: Colors.white,
@@ -114,17 +141,24 @@ class CustomerMenuScreen extends StatelessWidget {
                                         ),
                                       ),
                                       SizedBox(width: 10),
-                                      Text("0", 
-                                        style: TextStyle(
-                                          fontSize: 20
-                                        )
+                                      ValueListenableBuilder<int>(
+                                        valueListenable: _counters[index],
+                                        builder: (context, value, child) {
+                                          return Text("$value", 
+                                            style: TextStyle(
+                                              fontSize: 20
+                                            )
+                                          );
+                                        },
                                       ),
                                       SizedBox(width: 10),
                                       SizedBox(
                                         height: 30,
                                         child: ElevatedButton(
                                           onPressed: () {
-
+                                            _counters[index].value++;
+                                            _foodPrice.value +=
+                                              menu[index].price;
                                           },
                                           child: Icon(Icons.add, 
                                             color: Colors.white,
@@ -153,11 +187,173 @@ class CustomerMenuScreen extends StatelessWidget {
                   ),
                 );
               },
-              childCount: restaurants[restaurantIndex].menu.length
+              childCount: restaurants[widget.restaurantIndex].menu.length
             ),
           )
         ],
       ),
+      bottomNavigationBar: GestureDetector(
+        child: Padding(
+          padding: const EdgeInsets.all(9),
+          child: Container(
+            height: 50,
+            decoration: BoxDecoration(
+              color: Colors.deepOrange,
+              borderRadius: BorderRadius.circular(15)
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text("view your cart",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16
+                  )
+                ),
+                ValueListenableBuilder(
+                  valueListenable: _foodPrice, 
+                  builder: (context, value, child) {
+                    return Text("₱" + (value as double).toStringAsFixed(2),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16
+                      ),
+                    );
+                  }
+                )
+              ],
+            ),
+          ),
+        ),        
+        onTap: () {
+          showModalBottomSheet(
+            backgroundColor: Colors.deepOrange,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(top: Radius.circular(20))
+            ),
+            context: context, 
+            builder: (context) {
+              return Padding(
+                padding: const EdgeInsets.all(18),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Center(
+                        child: Text("cart",
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 50),
+                      _counters.any((element) => element.value > 0)
+                      ? Column(
+                          children: [
+                            ListView.builder(
+                              physics: NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: menu.length,
+                              itemBuilder: (context, index) {
+                                if (_counters[index].value > 0) {
+                                  return Card(
+                                    color: Colors.grey[50],
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20)
+                                    ),
+                                    child: ListTile(
+                                      leading: SizedBox(
+                                        width: 35,
+                                        height: 35,
+                                        child: menu[index].image
+                                      ),
+                                      title: Text(menu[index].name),
+                                      subtitle: Text("Qty: ${_counters[index].value}"),
+                                      trailing: Text("₱" + 
+                                        (menu[index].price * _counters[index].value)
+                                          .toStringAsFixed(2)
+                                      ),
+                                    ),
+                                  );
+                                } else {
+                                  return SizedBox(height: 0);
+                                }
+                              }
+                            ),
+                            SizedBox(height: 50),
+                            Container(
+                              padding: const EdgeInsets.only(right: 8),
+                              alignment: Alignment.centerRight,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Text("subtotal: ₱" + 
+                                    (_foodPrice.value).toStringAsFixed(2),
+                                    textAlign: TextAlign.right,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 14
+                                    ),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text("delivery fee: ₱" +
+                                    widget.restaurant.deliveryFee
+                                      .toStringAsFixed(2),
+                                    textAlign: TextAlign.right,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 14
+                                    ),
+                                  ),
+                                  SizedBox(height: 5),                                  
+                                  Text("total: ₱" + 
+                                    (_foodPrice.value + 
+                                      widget.restaurant.deliveryFee)
+                                        .toStringAsFixed(2),
+                                    textAlign: TextAlign.right,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            SizedBox(height: 10),
+                            SizedBox(
+                              width: double.infinity,
+                              child: RawMaterialButton(
+                                onPressed: () {}, 
+                                child: Text("pay"),
+                                fillColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30)
+                                )
+                              ),
+                            )                              
+                          ],
+                        )
+                      : Center(
+                          child: Text("your cart is empty :(",
+                            style: TextStyle(
+                              color: Colors.white
+                            ),
+                          )
+                        )
+                    ],
+                  ),
+                ),
+              );
+            }
+          );
+        },
+      )
     );
   }
 }
@@ -198,7 +394,7 @@ class _RestaurantHeaderDelegate extends SliverPersistentHeaderDelegate {
               child: Hero(
                 tag: "logo" + index.toString(),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(15),
                   child: restaurant.logo
                 )
               )
