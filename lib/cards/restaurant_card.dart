@@ -4,11 +4,11 @@ import 'package:dsa_final/database/restaurant.dart';
 
 class RestaurantCard extends StatefulWidget {
   final Restaurant restaurant;
-  final int index;
+  final int restaurantIndex;
   
   const RestaurantCard({Key? key, 
     required this.restaurant,
-    required this.index
+    required this.restaurantIndex
   }) : super(key: key);
 
   @override
@@ -28,7 +28,7 @@ class _RestaurantCardState extends State<RestaurantCard> {
             MaterialPageRoute(
               builder: (context) => CustomerMenuScreen(
                 restaurant: widget.restaurant,
-                index: widget.index
+                restaurantIndex: widget.restaurantIndex
               )
             )
           );
@@ -45,7 +45,7 @@ class _RestaurantCardState extends State<RestaurantCard> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
                   child: Hero(
-                    tag: "background" + widget.index.toString(),
+                    tag: "background" + widget.restaurantIndex.toString(),
                     child: widget.restaurant.background
                   )
                 )
@@ -53,7 +53,7 @@ class _RestaurantCardState extends State<RestaurantCard> {
               LayoutId(
                 id: _RestaurantCardSlot.logo, 
                 child: Hero(
-                  tag: "logo" + widget.index.toString(),
+                  tag: "logo" + widget.restaurantIndex.toString(),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: SizedBox(
@@ -72,7 +72,7 @@ class _RestaurantCardState extends State<RestaurantCard> {
                  child: SizedBox(
                    width: MediaQuery.of(context).size.width * 0.75,
                    child: Hero(
-                     tag: "name" + widget.index.toString(),
+                     tag: "name" + widget.restaurantIndex.toString(),
                      child: Material(
                        child: Text(widget.restaurant.name,
                         style: TextStyle(
@@ -91,7 +91,7 @@ class _RestaurantCardState extends State<RestaurantCard> {
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width * 0.75,
                   child: Hero(
-                    tag: "address" + widget.index.toString(),
+                    tag: "address" + widget.restaurantIndex.toString(),
                     child: Material(
                       child: Text(widget.restaurant.address,
                         maxLines: 2,

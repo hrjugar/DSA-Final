@@ -1,15 +1,16 @@
+import 'package:dsa_final/database/food.dart';
 import 'package:flutter/material.dart';
 import 'package:dsa_final/database/restaurant.dart';
 import 'dart:math';
 
 class CustomerMenuScreen extends StatelessWidget {
   final Restaurant restaurant;
-  final int index;
+  final int restaurantIndex;
 
   const CustomerMenuScreen({
     Key? key, 
     required this.restaurant,
-    required this.index
+    required this.restaurantIndex
   }) : super(key: key);
 
   @override
@@ -20,7 +21,7 @@ class CustomerMenuScreen extends StatelessWidget {
           SliverPersistentHeader(
             pinned: true,
             floating: true,
-            delegate: _RestaurantHeaderDelegate(restaurant, index)
+            delegate: _RestaurantHeaderDelegate(restaurant, restaurantIndex)
           ),
           SliverToBoxAdapter(
             child: SizedBox(
@@ -64,9 +65,7 @@ class CustomerMenuScreen extends StatelessWidget {
                                 maxWidth: 125,
                                 maxHeight: 100
                               ),
-                              child: Image.asset(
-                                "assets/images/menu_item_placeholder.png"
-                              ),
+                              child: restaurant.menu[index].image,
                             ),
                             SizedBox(width: 20),
                             SizedBox(
@@ -74,16 +73,17 @@ class CustomerMenuScreen extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Item $index",
+                                  Text(restaurant.menu[index].name,
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
-                                      fontSize: 20,
+                                      fontSize: 18,
                                       fontWeight: FontWeight.bold
                                     ),
                                   ),
                                   SizedBox(height: 5),
-                                  Text("₱1000.00", 
+                                  Text("₱" + restaurant.menu[index].price
+                                    .toStringAsFixed(2), 
                                     style: TextStyle(
                                       fontSize: 14,
                                       fontWeight: FontWeight.w500
@@ -152,8 +152,9 @@ class CustomerMenuScreen extends StatelessWidget {
                     ),
                   ),
                 );
-              }
-            )
+              },
+              childCount: restaurants[restaurantIndex].menu.length
+            ),
           )
         ],
       ),
