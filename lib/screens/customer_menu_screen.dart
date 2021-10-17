@@ -1,4 +1,6 @@
 import 'package:dsa_final/database/food.dart';
+import 'package:dsa_final/database/order.dart';
+import 'package:dsa_final/screens/customer_main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:dsa_final/database/restaurant.dart';
 import 'dart:math';
@@ -329,7 +331,29 @@ class _CustomerMenuScreenState extends State<CustomerMenuScreen> {
                             SizedBox(
                               width: double.infinity,
                               child: RawMaterialButton(
-                                onPressed: () {}, 
+                                onPressed: () {
+                                  Map<Food, int> items = {};
+                                  _counters.asMap().forEach((index, counter) {
+                                    if (counter.value > 0) {
+                                      items[menu[index]] = counter.value;
+                                    }
+                                   });
+
+                                  widget.restaurant.orders.add(
+                                    Order(items: items)
+                                  );
+
+                                  Navigator.push(
+                                    context, 
+                                    MaterialPageRoute(
+                                      builder: (context) => CustomerMainScreen()
+                                    )
+                                  );
+                                  
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text("Delivering..."))
+                                  );
+                                }, 
                                 child: Text("pay"),
                                 fillColor: Colors.white,
                                 shape: RoundedRectangleBorder(

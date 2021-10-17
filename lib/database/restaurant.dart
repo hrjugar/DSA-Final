@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'food.dart';
+import 'order.dart';
 
 class Restaurant {
   Image background;
   Image logo;
   String name;
   String address;
-  List<Food> menu;
   double deliveryFee;
+  List<Food> menu;
+  List<Order> orders;
 
   Restaurant({
     required String backgroundPath, 
@@ -17,7 +19,8 @@ class Restaurant {
     required this.menu
   }) : background = Image.asset(backgroundPath),
         logo = Image.asset(logoPath),
-        deliveryFee = 20.0;
+        deliveryFee = 20.0,
+        orders = [];
 }
 
 // TODO: Backend Work, add more data here
