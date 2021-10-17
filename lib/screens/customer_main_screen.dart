@@ -40,7 +40,7 @@ class CustomerMainScreen extends StatelessWidget {
             separatorBuilder: (context, index) => SizedBox(height: 20),
             itemBuilder: (context, index) => RestaurantCard(
               restaurant: restaurants[index],
-              index: index
+              restaurantIndex: index
             )
           ),
         )

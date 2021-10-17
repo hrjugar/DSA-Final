@@ -4,11 +4,11 @@ import 'package:dsa_final/database/restaurant.dart';
 
 class RestaurantCard extends StatefulWidget {
   final Restaurant restaurant;
-  final int index;
+  final int restaurantIndex;
   
   const RestaurantCard({Key? key, 
     required this.restaurant,
-    required this.index
+    required this.restaurantIndex
   }) : super(key: key);
 
   @override
@@ -28,7 +28,7 @@ class _RestaurantCardState extends State<RestaurantCard> {
             MaterialPageRoute(
               builder: (context) => CustomerMenuScreen(
                 restaurant: widget.restaurant,
-                index: widget.index
+                restaurantIndex: widget.restaurantIndex
               )
             )
           );
@@ -45,26 +45,26 @@ class _RestaurantCardState extends State<RestaurantCard> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
                   child: Hero(
-                    tag: "background" + widget.index.toString(),
+                    tag: "background" + widget.restaurantIndex.toString(),
                     child: widget.restaurant.background
                   )
                 )
               ),
               LayoutId(
                 id: _RestaurantCardSlot.logo, 
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: SizedBox(
-                    width: 50,
-                    height: 50,
-                    child: FittedBox(
-                      fit: BoxFit.fill,
-                      child: Hero(
-                        tag: "logo" + widget.index.toString(), 
+                child: Hero(
+                  tag: "logo" + widget.restaurantIndex.toString(),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: FittedBox(
+                        fit: BoxFit.fill,
                         child: widget.restaurant.logo
                       )
                     )
-                  )
+                  ),
                 )
               ),
               LayoutId(
@@ -72,7 +72,7 @@ class _RestaurantCardState extends State<RestaurantCard> {
                  child: SizedBox(
                    width: MediaQuery.of(context).size.width * 0.75,
                    child: Hero(
-                     tag: "name" + widget.index.toString(),
+                     tag: "name" + widget.restaurantIndex.toString(),
                      child: Material(
                        child: Text(widget.restaurant.name,
                         style: TextStyle(
@@ -91,7 +91,7 @@ class _RestaurantCardState extends State<RestaurantCard> {
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width * 0.75,
                   child: Hero(
-                    tag: "address" + widget.index.toString(),
+                    tag: "address" + widget.restaurantIndex.toString(),
                     child: Material(
                       child: Text(widget.restaurant.address,
                         maxLines: 2,
