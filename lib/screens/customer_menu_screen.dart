@@ -1,3 +1,4 @@
+import 'package:dsa_final/database/customer.dart';
 import 'package:dsa_final/database/food.dart';
 import 'package:dsa_final/database/order.dart';
 import 'package:dsa_final/screens/customer_main_screen.dart';
@@ -6,11 +7,13 @@ import 'package:dsa_final/database/restaurant.dart';
 import 'dart:math';
 
 class CustomerMenuScreen extends StatefulWidget {
+  final Customer customer;
   final Restaurant restaurant;
   final int restaurantIndex;
 
   const CustomerMenuScreen({
     Key? key, 
+    required this.customer,
     required this.restaurant,
     required this.restaurantIndex
   }) : super(key: key);
@@ -346,7 +349,9 @@ class _CustomerMenuScreenState extends State<CustomerMenuScreen> {
                                   Navigator.push(
                                     context, 
                                     MaterialPageRoute(
-                                      builder: (context) => CustomerMainScreen()
+                                      builder: (context) => CustomerMainScreen(
+                                        customer: widget.customer
+                                      )
                                     )
                                   );
                                   

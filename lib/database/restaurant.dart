@@ -3,6 +3,8 @@ import 'food.dart';
 import 'order.dart';
 
 class Restaurant {
+  String username;
+  String password;
   Image background;
   Image logo;
   String name;
@@ -12,6 +14,8 @@ class Restaurant {
   List<Order> orders;
 
   Restaurant({
+    required this.username,
+    required this.password,
     required String backgroundPath, 
     required String logoPath, 
     required this.name, 
@@ -26,6 +30,8 @@ class Restaurant {
 // TODO: Backend Work, add more data here
 List<Restaurant> restaurants = [
   Restaurant(
+    username: "r1",
+    password: "r1",
     backgroundPath: "assets/images/restaurant_placeholder.jpg", 
     logoPath: "assets/images/restaurant_logo_placeholder.png", 
     name: "Restaurant X", 
@@ -54,6 +60,8 @@ List<Restaurant> restaurants = [
     ]
   ),
   Restaurant(
+    username: "r2",
+    password: "r2",
     backgroundPath: "assets/images/restaurant_placeholder.jpg", 
     logoPath: "assets/images/restaurant_logo_placeholder.png", 
     name: "Restaurant Y", 
@@ -77,6 +85,8 @@ List<Restaurant> restaurants = [
     ]
   ),
   Restaurant(
+    username: "r3",
+    password: "r3",
     backgroundPath: "assets/images/restaurant_placeholder.jpg", 
     logoPath: "assets/images/restaurant_logo_placeholder.png", 
     name: "Restaurant Z", 

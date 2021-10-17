@@ -6,5 +6,5 @@ class Customer {
 }
 
 List<Customer> customers = [
-  Customer(username: "admin", password: "admin")
+  Customer(username: "c1", password: "c1")
 ];

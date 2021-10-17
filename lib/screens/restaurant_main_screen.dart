@@ -1,7 +1,9 @@
+import 'package:dsa_final/database/restaurant.dart';
 import 'package:flutter/material.dart';
 
 class RestaurantMainScreen extends StatelessWidget {
-  const RestaurantMainScreen({Key? key}) : super(key: key);
+  final Restaurant restaurant;
+  const RestaurantMainScreen({Key? key, required this.restaurant}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

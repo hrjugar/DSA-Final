@@ -1,10 +1,12 @@
 import 'package:dsa_final/cards/restaurant_card.dart';
+import 'package:dsa_final/database/customer.dart';
 import 'package:dsa_final/database/restaurant.dart';
 import 'package:dsa_final/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class CustomerMainScreen extends StatelessWidget {
-  const CustomerMainScreen({Key? key}) : super(key: key);
+  final Customer customer;
+  const CustomerMainScreen({Key? key, required this.customer}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +41,7 @@ class CustomerMainScreen extends StatelessWidget {
             scrollDirection: Axis.vertical,
             separatorBuilder: (context, index) => SizedBox(height: 20),
             itemBuilder: (context, index) => RestaurantCard(
+              customer: customer,
               restaurant: restaurants[index],
               restaurantIndex: index
             )

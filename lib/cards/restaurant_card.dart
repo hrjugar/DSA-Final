@@ -1,12 +1,15 @@
+import 'package:dsa_final/database/customer.dart';
 import 'package:dsa_final/screens/customer_menu_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:dsa_final/database/restaurant.dart';
 
 class RestaurantCard extends StatefulWidget {
+  final Customer customer;
   final Restaurant restaurant;
   final int restaurantIndex;
   
-  const RestaurantCard({Key? key, 
+  const RestaurantCard({Key? key,
+    required this.customer, 
     required this.restaurant,
     required this.restaurantIndex
   }) : super(key: key);
@@ -27,6 +30,7 @@ class _RestaurantCardState extends State<RestaurantCard> {
             context, 
             MaterialPageRoute(
               builder: (context) => CustomerMenuScreen(
+                customer: widget.customer,
                 restaurant: widget.restaurant,
                 restaurantIndex: widget.restaurantIndex
               )
