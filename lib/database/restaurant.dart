@@ -27,85 +27,84 @@ class Restaurant {
         orders = [];
 }
 
-// TODO: Backend Work, add more data here
 List<Restaurant> restaurants = [
   Restaurant(
     username: "r1",
     password: "r1",
-    backgroundPath: "assets/images/restaurant_placeholder.jpg", 
-    logoPath: "assets/images/restaurant_logo_placeholder.png", 
-    name: "Restaurant X", 
+    backgroundPath: "assets/images/jollibee_background.jpg", 
+    logoPath: "assets/images/jollibee_logo.png", 
+    name: "Jollibee", 
     address: "Lanang, Davao City, Philippines", 
     menu: [
       Food(
-        name: "Food Name 1", 
+        name: "Burger Steak", 
         price: 100, 
-        imagePath: "assets/images/menu_item_placeholder.png"
+        imagePath: "assets/images/jollibee_burgerSteak.png"
       ),
       Food(
-        name: "Food Name 2",
+        name: "Chickenjoy",
         price: 200,
-        imagePath: "assets/images/menu_item_placeholder.png"
+        imagePath: "assets/images/jollibee_chickenjoy.png"
       ),
       Food(
-        name: "Food Name 3",
+        name: "Yum Burger",
         price: 300,
-        imagePath: "assets/images/menu_item_placeholder.png"
+        imagePath: "assets/images/jollibee_spaghetti.png"
       ),
       Food(
-        name: "Food Name 4", 
+        name: "Jolly Spaghetti", 
         price: 400, 
-        imagePath: "assets/images/menu_item_placeholder.png"
+        imagePath: "assets/images/jollibee_yumBurger.jpg"
       )
     ]
   ),
   Restaurant(
     username: "r2",
     password: "r2",
-    backgroundPath: "assets/images/restaurant_placeholder.jpg", 
-    logoPath: "assets/images/restaurant_logo_placeholder.png", 
-    name: "Restaurant Y", 
+    backgroundPath: "assets/images/kfc_background.jpg", 
+    logoPath: "assets/images/kfc_logo.png", 
+    name: "KFC", 
     address: "Address Y", 
     menu: [
       Food(
-        name: "Food Name 1", 
+        name: "Bucket Fries", 
         price: 100, 
-        imagePath: "assets/images/menu_item_placeholder.png"
+        imagePath: "assets/images/kfc_bucketFries.png"
       ),
       Food(
-        name: "Food Name 2",
+        name: "Mashed Potato",
         price: 200,
-        imagePath: "assets/images/menu_item_placeholder.png"
+        imagePath: "assets/images/kfc_mashedPotato.png"
       ),
       Food(
-        name: "Food Name 3",
+        name: "Zinger Steak",
         price: 300,
-        imagePath: "assets/images/menu_item_placeholder.png"
+        imagePath: "assets/images/kfc_zingerSteak.jpg"
       )
     ]
   ),
   Restaurant(
     username: "r3",
     password: "r3",
-    backgroundPath: "assets/images/restaurant_placeholder.jpg", 
-    logoPath: "assets/images/restaurant_logo_placeholder.png", 
-    name: "Restaurant Z", 
+    backgroundPath: "assets/images/mcdo_background.jpg", 
+    logoPath: "assets/images/mcdo_logo.png", 
+    name: "McDonald's", 
     address: "Mt. Apo, Philippines", 
     menu: [
       Food(
-        name: "Food Name 1", 
+        name: "Chicken Fillet", 
         price: 100, 
-        imagePath: "assets/images/menu_item_placeholder.png"
+        imagePath: "assets/images/mcdo_chickenFillet.png"
       ),
       Food(
-        name: "Food Name 2",
+        name: "Large Fries",
         price: 200,
-        imagePath: "assets/images/menu_item_placeholder.png"
+        imagePath: "assets/images/mcdo_fries.jpeg"
       ),
       Food(
-        name: "Food Name 3",
+        name: "Chicken McNuggets",
         price: 300,
-        imagePath: "assets/images/menu_item_placeholder.png"
+        imagePath: "assets/images/mcdo_nuggets.png"
       )
     ]
   )  
