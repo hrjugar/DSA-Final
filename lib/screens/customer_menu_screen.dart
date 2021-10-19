@@ -342,7 +342,7 @@ class _CustomerMenuScreenState extends State<CustomerMenuScreen> {
                                     }
                                    });
 
-                                  widget.restaurant.orders.add(
+                                  widget.restaurant.orders.enqueue(
                                     Order(
                                       items: items, 
                                       customer: widget.customer
