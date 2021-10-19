@@ -5,10 +5,16 @@ import 'package:flutter/material.dart';
 
 import 'login_screen.dart';
 
-class RestaurantMainScreen extends StatelessWidget {
+class RestaurantMainScreen extends StatefulWidget {
   final Restaurant restaurant;
   const RestaurantMainScreen({Key? key, required this.restaurant})
       : super(key: key);
+
+  @override
+  _RestaurantMainScreenState createState() => _RestaurantMainScreenState();
+}
+
+class _RestaurantMainScreenState extends State<RestaurantMainScreen> {
 
   @override
   Widget build(BuildContext context) {
@@ -28,13 +34,13 @@ class RestaurantMainScreen extends StatelessWidget {
               icon: Icon(Icons.logout)),
         ],
       ),
-      body: restaurant.orders.orderList.isEmpty
+      body: widget.restaurant.orders.orderList.isEmpty
           ? Center(child: Text("There are currently no orders :("))
           : ListView.builder(
               shrinkWrap: true,
-              itemCount: restaurant.orders.orderList.length,
+              itemCount: widget.restaurant.orders.orderList.length,
               itemBuilder: (context, index) {
-                Order order = restaurant.orders.orderList[index];
+                Order order = widget.restaurant.orders.orderList[index];
                 return ExpansionTile(
                   title: Text(
                     order.customer.username,
@@ -42,42 +48,46 @@ class RestaurantMainScreen extends StatelessWidget {
                   ),
                   subtitle: Text(order.timeOrdered.toString().substring(0, 19)),
                   children: [
-                    ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: order.items.length,
-                        itemBuilder: (context, index) {
-                          Food food = order.items.keys.elementAt(index);
-                          int count = order.items.values.elementAt(index);
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 9),
-                            child: Card(
-                              color: Colors.grey[50],
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15)),
-                              child: ListTile(
-                                leading: SizedBox(width: 50, child: food.image),
-                                title: Text(
-                                  food.name,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
+                    StatefulBuilder(
+                      builder: (BuildContext context, StateSetter setState) {
+                        return ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: order.items.length,
+                            itemBuilder: (context, index) {
+                              Food food = order.items.keys.elementAt(index);
+                              int count = order.items.values.elementAt(index);
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 9),
+                                child: Card(
+                                  color: Colors.grey[50],
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15)),
+                                  child: ListTile(
+                                    leading: SizedBox(width: 50, child: food.image),
+                                    title: Text(
+                                      food.name,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    subtitle: Text("₱" +
+                                        (food.price * count).toStringAsFixed(2)),
+                                    trailing: Text("Qty: $count"),
+                                  ),
                                 ),
-                                subtitle: Text("₱" +
-                                    (food.price * count).toStringAsFixed(2)),
-                                trailing: Text("Qty: $count"),
-                              ),
-                            ),
-                          );
-                        })
+                              );
+                            });
+                      }
+                    )
                   ],
                 );
               }),
       bottomNavigationBar: GestureDetector(
         onTap: () {
-          // TODO: Backend Work (queue)
-          restaurant.orders.dequeue();
+          setState(() {});
+          widget.restaurant.orders.dequeue();
         },
         child: Padding(
           padding: const EdgeInsets.all(9),

@@ -9,7 +9,7 @@ class Queue<Order> {
 
   Object dequeue() {
     var temp = null;
-    if (orderList.isEmpty) {
+    if (!orderList.isEmpty) {
       temp = orderList[0];
       orderList.remove(temp);
       print(orderList);
