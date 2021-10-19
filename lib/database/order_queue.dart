@@ -1,4 +1,5 @@
-import 'package:flutter/gestures.dart';
+// import 'package:dsa_final/database/order.dart';
+// import 'package:flutter/gestures.dart';
 
 class Queue<Order> {
   List<Order> orderList = [];
@@ -7,12 +8,11 @@ class Queue<Order> {
     orderList.add(order);
   }
 
-  Object dequeue() {
-    var temp = null;
-    if (!orderList.isEmpty) {
+  Order dequeue() {
+    late Order temp;
+    if (orderList.isNotEmpty) {
       temp = orderList[0];
       orderList.remove(temp);
-      print(orderList);
     }
     return temp;
   }
