@@ -9,5 +9,5 @@ class Food {
     required this.name,
     required this.price,
     required String imagePath
-  }) : image = Image.asset(imagePath, height: 115, width: 115,);
+  }) : image = Image.asset(imagePath, height: 90, width: 90,);
 }
