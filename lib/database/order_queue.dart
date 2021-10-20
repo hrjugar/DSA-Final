@@ -1,6 +1,3 @@
-// import 'package:dsa_final/database/order.dart';
-// import 'package:flutter/gestures.dart';
-
 class Queue<Order> {
   List<Order> orderList = [];
 
