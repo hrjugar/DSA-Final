@@ -30,7 +30,7 @@ class Restaurant {
 
 List<Restaurant> restaurants = [
   Restaurant(
-      username: "r1",
+      username: "jollibee",
       password: "r1",
       backgroundPath: "assets/images/jollibee_background.jpg",
       logoPath: "assets/images/jollibee_logo.png",
@@ -39,23 +39,23 @@ List<Restaurant> restaurants = [
       menu: [
         Food(
             name: "Burger Steak",
-            price: 100,
+            price: 65,
             imagePath: "assets/images/jollibee_burgerSteak.png"),
         Food(
             name: "Chickenjoy",
-            price: 200,
+            price: 84,
             imagePath: "assets/images/jollibee_chickenjoy.png"),
         Food(
-            name: "Yum Burger",
-            price: 300,
+            name: "Jolly Spaghetti",
+            price: 55,
             imagePath: "assets/images/jollibee_spaghetti.png"),
         Food(
-            name: "Jolly Spaghetti",
-            price: 400,
+            name: "Yum Burger",
+            price: 39,
             imagePath: "assets/images/jollibee_yumBurger.jpg")
       ]),
   Restaurant(
-      username: "r2",
+      username: "kfc",
       password: "r2",
       backgroundPath: "assets/images/kfc_background.jpg",
       logoPath: "assets/images/kfc_logo.png",
@@ -64,19 +64,19 @@ List<Restaurant> restaurants = [
       menu: [
         Food(
             name: "Bucket Fries",
-            price: 100,
+            price: 150,
             imagePath: "assets/images/kfc_bucketFries.png"),
         Food(
             name: "Mashed Potato",
-            price: 200,
+            price: 45,
             imagePath: "assets/images/kfc_mashedPotato.png"),
         Food(
             name: "Zinger Steak",
-            price: 300,
+            price: 110,
             imagePath: "assets/images/kfc_zingerSteak.jpg")
       ]),
   Restaurant(
-      username: "r3",
+      username: "mcdo",
       password: "r3",
       backgroundPath: "assets/images/mcdo_background.jpg",
       logoPath: "assets/images/mcdo_logo.png",
@@ -85,15 +85,15 @@ List<Restaurant> restaurants = [
       menu: [
         Food(
             name: "Chicken Fillet",
-            price: 100,
+            price: 120,
             imagePath: "assets/images/mcdo_chickenFillet.png"),
         Food(
             name: "Large Fries",
-            price: 200,
+            price: 140,
             imagePath: "assets/images/mcdo_fries.jpeg"),
         Food(
             name: "Chicken McNuggets",
-            price: 300,
+            price: 145,
             imagePath: "assets/images/mcdo_nuggets.png")
       ])
 ];
