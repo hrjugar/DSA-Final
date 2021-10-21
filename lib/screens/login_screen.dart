@@ -122,8 +122,17 @@ class LoginScreenState extends State<LoginScreen> {
                   print("C1: ${_usernameController.text}");
                   if (account == null) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("Invalid username or password."))
-                    );
+                      SnackBar(
+                        content: Text("Invalid username or password.", 
+                          textAlign: TextAlign.center
+                        ),
+                        behavior: SnackBarBehavior.floating,
+                        duration: Duration(milliseconds: 2000),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15)
+                        ),
+                      )
+                    );                    
                   } else if (_toggleSwitchIndex == 0) {
                     Navigator.push(
                       context, 

@@ -359,8 +359,18 @@ class _CustomerMenuScreenState extends State<CustomerMenuScreen> {
                                   );
                                   
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text("Delivering..."))
+                                      SnackBar(
+                                        content: Text("Delivering...", 
+                                          textAlign: TextAlign.center
+                                        ),
+                                        behavior: SnackBarBehavior.floating,
+                                        duration: Duration(milliseconds: 2000),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(15)
+                                        ),
+                                      )                            
                                   );
+                                  
                                 }, 
                                 child: Text("pay"),
                                 fillColor: Colors.white,

@@ -86,8 +86,26 @@ class _RestaurantMainScreenState extends State<RestaurantMainScreen> {
               }),
       bottomNavigationBar: GestureDetector(
         onTap: () {
-          setState(() {});
-          widget.restaurant.orders.dequeue();
+          String snackbarText = "";
+          setState(() {
+            if (widget.restaurant.orders.orderList.isEmpty) {
+              snackbarText = "No orders to deliver for.";
+            } else {
+              snackbarText  = "Delivering...";
+              widget.restaurant.orders.dequeue();
+            }
+          });
+
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(snackbarText, textAlign: TextAlign.center),
+              behavior: SnackBarBehavior.floating,
+              duration: Duration(milliseconds: 2000),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15)
+              ),
+            )
+          );
         },
         child: Padding(
           padding: const EdgeInsets.all(9),
